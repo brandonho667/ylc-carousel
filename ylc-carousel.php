@@ -51,7 +51,7 @@ function display_carousel() {
                 else
                     $rel = '';
                 ?>
-                <li style="background: <?php echo $background; ?>">
+                <li style="background-image: <?php echo $background; ?>">
                     <a href="<?php echo $link->link_url; ?>" class="carousel-link">
                         <strong><?php echo $link->link_name; ?></strong>
                         <?php
