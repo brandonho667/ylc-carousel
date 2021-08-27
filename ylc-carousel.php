@@ -6,6 +6,9 @@
  * Version: 1.0.0
  */
 
+defined( 'ABSPATH' ) or die(':)');
+
+ // temp php logger for debugging
 function console_log($output, $with_script_tags = true) {
     $js_code = 'console.log(' . json_encode($output, JSON_HEX_TAG) . 
 ');';
@@ -16,7 +19,6 @@ function console_log($output, $with_script_tags = true) {
 }
 
 function display_carousel() {
-    console_log("cock and balls");
     $args = array(
         'category_name' => 'carousel',
         'orderby' => 'link_id',
@@ -28,8 +30,6 @@ function display_carousel() {
     $n = count($links);
 
     if (!empty($links)) {
-        wp_register_script('carousel-js', plugin_dir_url(__FILE__) . 'carousel.js', array('jquery'), '1.0', true);
-        wp_enqueue_script('carousel-js');
         ?>
         <div id="carousel">
             <ul style="width: <?php echo $n * 100; ?>%;">
@@ -52,7 +52,7 @@ function display_carousel() {
                     $rel = '';
                 ?>
                 <li style="background-image: <?php echo $background; ?>">
-                    <a href="<?php echo $link->link_url; ?>" class="carousel-link">
+                    <a class="vp-a" href="<?php echo $link->link_url; ?>" title="<?php echo $link->link_name; ?>">
                         <strong><?php echo $link->link_name; ?></strong>
                         <?php
                         if (!empty($link->link_description)) {
@@ -88,11 +88,8 @@ function display_carousel() {
     }
 }
 
-function enqueue_carousel_style() {
-    wp_register_style('carousel-css', plugin_dir_url(__FILE__) . 'carousel.css');
-    wp_enqueue_style('carousel-css', plugin_dir_url(__FILE__) . 'carousel.css');
-}
-add_action('wp_enqueue_scripts', 'enqueue_carousel_style');
 add_shortcode('ylc-carousel', 'display_carousel');
 
 add_filter( 'pre_option_link_manager_enabled', '__return_true' );
+
+require_once dirname( __FILE__ ). '/enqueue-scripts.php';

@@ -1,3 +1,10 @@
+/*
+    Name: ylc-carousel
+    Description: jQuery plugin to animate the carousel
+    Version: 1.1.2
+    Written By: Brandon Ho
+*/
+
 jQuery(function($) {
 	function carousel_show_another_link(direction) {
         var ul = $('#carousel ul');
